@@ -1,0 +1,70 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<dom-module id='task-page'>
+    <template>
+        <style>
+            .card{
+                width:20%; 
+                background-color:pink; 
+                display: inline-block;
+                margin-bottom: 20px !important;
+            }
+        </style>
+        <!--<iron-ajax auto url= "https://jsonplaceholder.typicode.com/users" id="coinbase" handle_as="json" on_response="_handleResponse">-->
+
+        <!--<iron-ajax
+            auto
+            url="https://jsonplaceholder.typicode.com/users"
+            handle-as="json"
+            on-response="_handleResponse"
+            debounce-duration="300"></iron-ajax>
+        </iron-ajax>-->
+        <iron-ajax auto
+               url = "https://jsonplaceholder.typicode.com/users"
+               params = "{'q': q}" handle-as = "json" on-response = "_handleResponse"
+               debounce-duration = "500">
+            </iron-ajax>
+        <template is="dom-repeat" items="{{echo123}}">
+            <div class="card" on-click="addTask"> 
+                <div>Task Id: <span>{{item.id}}</span></div>
+                <div>Task Description: <span>{{item.name}}</span></div>
+                <div>Assignee: <span>{{item.username}}</span></div>
+            </div>
+            
+        </template>
+       <paper-card >
+        <div class="card-content" on-click="addTask">
+            <iron-icon icon="add" class="add" on-click="test"></iron-icon>
+            <p>Add Task</p>
+        </div>
+        <div class="card-actions">
+           
+        </div>
+      </paper-card>
+      <paper-button raised on-click="backpage">Back</paper-button>
+   
+    </template>
+    <script>
+        class TaskPage extends Polymer.Element{
+            static get is(){return 'task-page';}
+
+            _handleResponse(event, request) {
+                     var responsedata = request.response;
+                     this.echo123 = responsedata;
+             }
+             
+             addTask(){
+                window.history.pushState({},null,'/add-task');
+                window.location.href='/add-task';
+            }
+
+            backpage() {
+                window.history.pushState({},null,'/dash-board');
+                window.location.href='/dash-board';
+            }
+
+        }
+        window.customElements.define(TaskPage.is, TaskPage);
+    </script>
+<dom-module>

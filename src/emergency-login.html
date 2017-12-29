@@ -1,0 +1,37 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+
+
+<dom-module id="emergency-login">
+    <template>
+      <div style="width:500px !important;padding-left:500px !important;">
+        <h1>Login</h1>
+        <iron-form id="login">
+            <form action="/login" method="get">
+                <paper-input type="text" name="uname" label="User Name" value="" required></paper-input>
+                <paper-input name="pword" label="Password" value=""></paper-input>
+                <paper-button raised on-click="submit">Login</paper-button>
+            </form>
+        </iron-form>
+
+     <!-- <a href="[[rootPath]]view2" tabindex="-1">
+          <paper-button raised class="indigo">Login</paper-button>
+      </a> -->
+      
+    </div>
+    </template>
+    <script>
+        class EmergencyLogin extends Polymer.Element {
+            static get is(){return  'emergency-login';}
+            submit() {
+                window.history.pushState({},null,'/dash-board');
+                window.location.href='/dash-board';
+                //alert('hi Submitter');
+            }
+        }
+
+        window.customElements.define(EmergencyLogin.is, EmergencyLogin);
+    </script>
+<dom-module>

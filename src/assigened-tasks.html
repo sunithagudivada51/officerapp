@@ -1,0 +1,67 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/bwt-datatable/bwt-datatable.html">
+<dom-module id="assigened-tasks">
+    <template>
+        <paper-datatable data="{{results}}" selectable multi-selection>
+          <paper-datatable-column header="TaskId" property="taskId" sortable>
+        <template>
+            <paper-input value="{{value}}">
+        </template>
+    </paper-datatable-column>  
+      <paper-datatable-column header="Reporter Name" property="repoterName" sortable>
+        <template>
+            <paper-input value="{{value}}">
+        </template>
+    </paper-datatable-column>
+     <paper-datatable-column header="Description" property="description" sortable>
+        <template>
+            <paper-input value="{{value}}">
+        </template>
+    </paper-datatable-column>
+    <paper-datatable-column header="Date" property="date" sortable>
+        <template>
+            <paper-input value="{{value}}">
+        </template>
+    </paper-datatable-column>
+    </paper-datatable>
+    </template>
+    <script>
+        class AssigenedTasks extends Polymer.Element{
+            static get is(){return "assigened-tasks";}
+            constructor() {
+                super();
+                this.data = [
+                {taskId: '1', repoterName: 'xxx', date:'12/2/2017',description:'fsdfdsfsdfs'},
+                {taskId: '2', repoterName: 'yyy', date:'2/2/2017',description:'wrwerewr'},
+                {taskId: '1', repoterName: 'zzz', date:'22/2/2017',description:'rwrwr2343243'},
+                {taskId: '2', repoterName: 'lllLi', date:'1/2/2017',description:'424242'}
+                ];
+                var temp1= localStorage.getItem('taskId'),i =0;
+                this.results= this.data.map(function(curvalue,i,temp){
+                    debugger;
+                    if (curvalue.taskId == temp1) {
+                      return curvalue;
+                    }
+                },this)
+                console.log(this.results);
+                this.results = this.results.filter(function( element ) {
+                return element !== undefined;
+                });
+                 
+                //  this.data.forEach(function(element) {
+                //      debugger;
+                //      if (element.taskId ==localStorage.getItem('taskId')) {
+                //       this.results = element;
+                //         //localStorage.setItem('filterData', filterData);
+                //         console.log(this.results);
+                //     }
+                // }, this);
+                 
+            }
+
+           
+
+        }
+         window.customElements.define(AssigenedTasks.is, AssigenedTasks);
+    </script>
+<dom-module>

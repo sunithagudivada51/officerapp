@@ -1,0 +1,62 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<dom-module id='official-page'>
+    <template>
+        <style>
+            .card{
+                width:30%; 
+                display: inline-block;
+                margin-bottom: 20px !important;
+            }
+            h2{
+                padding-left: 500px;
+            }
+        </style>
+        <h2>Officier Page Details</h2>
+        <template is="dom-repeat" items="{{officials}}">
+             
+            <div class="card" on-click="officialEditTask"> 
+                <div>Task Id: <span>{{item.taskId}}</span></div>
+                <div>Officer Name: <span>{{item.assignername}}</span></div>
+                <div>Task Description: <span>{{item.taskDescription}}</span></div>
+                 <div>Date Completion: <span>{{item.date}}</span></div>
+            </div>
+        </template>
+    </template>
+    <script>
+        class OfficialPage extends Polymer.Element{
+            static get is() {return 'official-page';}
+            constructor() {
+        super();
+        this.officials = [
+          {assignername: 'Bob', taskId: '1',taskDescription: 'dfsdfsdfwreewtretertre',date:'12/12/2017'},
+          {assignername: 'Ayesha', taskId: '2',taskDescription: 'dfsfswr432535345',date:'12/12/2017'},
+          {assignername: 'Fatma', taskId: '3',taskDescription: '1111111111111111111111111',date:'12/12/2017'},
+          {assignername: 'Tony', taskId: '4',taskDescription: 'dfsdfsdfwqqqqqqqreewtretertre',date:'12/12/2017'}
+        ]; 
+      }
+      officialEditTask(e){
+          debugger;
+          var taskId= e.model.item.taskId,
+            i=1,
+            data=  this.officials,
+            filterData;
+            localStorage.setItem('taskId', taskId);
+            window.history.pushState({},null,'/assigened-tasks');
+            window.location.href='/assigened-tasks';
+
+          
+         
+      }
+
+      search(nameKey, myArray){
+            for (var i=0; i < myArray.length; i++) {
+                if (myArray[i].name === nameKey) {
+                    return myArray[i];
+                }
+            }
+        }
+
+        }
+        window.customElements.define(OfficialPage.is, OfficialPage);
+    </script>
+</dom-module>

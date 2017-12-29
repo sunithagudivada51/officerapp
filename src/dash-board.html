@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<dom-module id="dash-board">
+    <template>
+        <div class="card">
+            <paper-button raised on-click="taskPage">Tasks</paper-button>
+            <paper-button raised on-click="officialPage">Officials</paper-button>
+        </div>
+    </template>
+    <script>
+        class DashBoard extends Polymer.Element{
+            static get is() { return 'dash-board';}
+            taskPage() {
+                window.history.pushState({},null,'/task-page');
+                window.location.href='/task-page';
+            }
+            officialPage() {
+                window.history.pushState({},null,'/official-page');
+                window.location.href='/official-page';
+            }
+
+        }
+         window.customElements.define(DashBoard.is, DashBoard);
+    </script>
+</dom-module>

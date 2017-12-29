@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<dom-module id="add-task">
+    <template>
+        
+        <iron-form id="save" style="width:500px;margin-top:50px;padding-left:500px;">
+            <h2> Add Task</h2>
+            <form action="/save" method="get">
+                <paper-input type="text" name="uname" label="Task Id:" value="" required></paper-input>
+                <paper-input name="pword" label="Task Description:" value=""></paper-input>
+                <paper-input name="Assignee" label="Assignee:" value=""></paper-input>
+                <vaadin-date-picker label="Completion date:">
+                </vaadin-date-picker>
+                <paper-checkbox>Completed</paper-checkbox><br>
+                <paper-button raised on-click="submit">save</paper-button>
+                <paper-button raised on-click="backpage">Back</paper-button>
+            </form>
+        </iron-form>
+         
+    </template>
+    <script>
+        class AddTask extends Polymer.Element {
+            static get is(){return "add-task";}
+            backpage() {
+                window.history.pushState({},null,'/dash-board');
+                window.location.href='/dash-board';
+            }
+        }
+        window.customElements.define(AddTask.is, AddTask);
+    </script>
+</dom-module>
